@@ -3,6 +3,7 @@ import 'package:al/models/WareHousesModel.dart';
 import 'package:al/services/warehouse.dart';
 import 'package:flutter/material.dart';
 import 'package:ots/ots.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import '../../../services/auth.dart';
 import '../../mainMenu.dart';
 import 'package:r_upgrade/r_upgrade.dart';
@@ -20,12 +21,14 @@ class _SettIndex extends State<SettIndex> {
   int? WareId;
   String? jwt;
 
+  PackageInfo? appInfo;
+
 
   @override
   Widget build(BuildContext context) {
     AuthService().getWareId().then((value) => WareId = value);
     AuthService().getJwt().then((value) => jwt = value);
-
+    PackageInfo.fromPlatform().then((value) => appInfo = value);
     return Scaffold(
       body: FutureBuilder<WareHousesModel>(
         future: WarehouseService().getWarehouse(),
@@ -48,7 +51,6 @@ class _SettIndex extends State<SettIndex> {
   }
   Widget _buildSettings (List<Data> userSettings) {
 
-
     return Column(
       children: [
         Card(
@@ -66,6 +68,14 @@ class _SettIndex extends State<SettIndex> {
         ),
         const Divider(thickness: 20, color: Colors.white54),
         Card(
+          child: ListTile(
+            leading: const Icon(Icons.info, color: Colors.blue,),
+            title: Text('Name: ' + appInfo!.appName, style: const TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+            subtitle: Text('V: ' + appInfo!.version, textAlign: TextAlign.center,),
+            trailing: const Icon(Icons.info, color: Colors.blue),
+          ),
+        ),
+        Card(
           color: Colors.blueAccent,
           child: ListTile(
             leading: const Icon(Icons.update, color: Colors.white,),
@@ -76,6 +86,7 @@ class _SettIndex extends State<SettIndex> {
             },
           ),
         ),
+
         const Divider(thickness: 20, color: Colors.white54),
 
         Card(
@@ -105,17 +116,15 @@ class _SettIndex extends State<SettIndex> {
     );
   }
 
-  Widget _selectWarehouse(WareHousesModel warehouses) {
-    String jsonData = warehouses.data.toString();
-    List<Map<String, dynamic>> resp = json.decode(jsonData);
-    return Text(jsonData);
-  }
-
   void upgrade() async {
+    showLoader();
     RUpgrade.upgrade(
-        'https://github.com/TheMindBreaker/CNSMX-AL-MOBILE/tree/main/CurrentAPK/app-release.apk',
-        fileName: 'app-release.apk',isAutoRequestInstall: true
-    ).then((value) => dev.log(value.toString()));
+        'https://github.com/TheMindBreaker/CNSMX-AL-MOBILE/raw/main/CurrentAPK/app-release.apk',
+        fileName: 'app-release.apk',isAutoRequestInstall: true, notificationVisibility: NotificationVisibility.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
+    ).then((value) => {
+      dev.log(value.toString()),
+      hideLoader()
+    });
   }
 
 }

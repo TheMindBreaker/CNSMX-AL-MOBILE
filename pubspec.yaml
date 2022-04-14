@@ -47,6 +47,7 @@ dependencies:
   signature: ^5.0.0
   images_picker: ^1.2.11
   r_upgrade: ^0.3.8+1
+  package_info_plus: ^1.4.2
 
 flutter_icons:
   android: "launcher_icon"
