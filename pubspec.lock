@@ -352,6 +352,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.0"
+  r_upgrade:
+    dependency: "direct main"
+    description:
+      name: r_upgrade
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.8+1"
   screen_loader:
     dependency: "direct main"
     description:

@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:ots/ots.dart';
 import '../../../services/auth.dart';
 import '../../mainMenu.dart';
+import 'package:r_upgrade/r_upgrade.dart';
+import 'dart:developer' as dev;
+
 
 class SettIndex extends StatefulWidget {
   const SettIndex({Key? key}) : super(key: key);
@@ -63,6 +66,19 @@ class _SettIndex extends State<SettIndex> {
         ),
         const Divider(thickness: 20, color: Colors.white54),
         Card(
+          color: Colors.blueAccent,
+          child: ListTile(
+            leading: const Icon(Icons.update, color: Colors.white,),
+            title: const Text('Actualizar App', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white), textAlign: TextAlign.center,),
+            trailing: const Icon(Icons.update, color: Colors.white),
+            onTap: () {
+              upgrade();
+            },
+          ),
+        ),
+        const Divider(thickness: 20, color: Colors.white54),
+
+        Card(
           color: Colors.redAccent,
           child: ListTile(
             leading: const Icon(Icons.door_back_door, color: Colors.white,),
@@ -93,6 +109,13 @@ class _SettIndex extends State<SettIndex> {
     String jsonData = warehouses.data.toString();
     List<Map<String, dynamic>> resp = json.decode(jsonData);
     return Text(jsonData);
+  }
+
+  void upgrade() async {
+    RUpgrade.upgrade(
+        'https://github.com/TheMindBreaker/CNSMX-AL-MOBILE/tree/main/CurrentAPK/app-release.apk',
+        fileName: 'app-release.apk',isAutoRequestInstall: true
+    ).then((value) => dev.log(value.toString()));
   }
 
 }
