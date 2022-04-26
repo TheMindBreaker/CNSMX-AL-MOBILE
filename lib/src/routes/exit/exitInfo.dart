@@ -6,7 +6,7 @@ import 'package:al/services/warehouse.dart';
 import 'package:ots/ots.dart';
 import 'dart:developer' as developer;
 import '../../../models/ExitsDetails.dart';
-import '../../../models/ExitsInfo.dart';
+import '../../../models/ExitsInfo.dart' as infoData;
 import 'package:signature/signature.dart';
 import 'dart:convert';
 import 'package:images_picker/images_picker.dart';
@@ -15,7 +15,7 @@ import 'package:images_picker/images_picker.dart';
 
 class ExitInfo extends StatefulWidget {
   final int exitId;
-  final ExistsInfo info;
+  final infoData.Data info;
   const ExitInfo({Key? key, required this.exitId, required this.info}) : super(key: key);
 
   @override
@@ -88,8 +88,8 @@ class _ExitInfo extends State<ExitInfo> {
 
               ListTile(
                 leading: const Icon(Icons.verified_user, color: Colors.blue),
-                title: Text('Entregar a: ' + widget.info.data[0].receiverName),
-                subtitle: Text('Frente: ' + widget.info.data[0].frontName),
+                title: Text('Entregar a: ' + widget.info.receiverName),
+                subtitle: Text('Frente: ' + widget.info.frontName),
               ),
 
               const Divider(

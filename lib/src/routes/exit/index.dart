@@ -59,7 +59,7 @@ class _ExitIndex extends State<ExitIndex> {
               child:ListTile(
                   onTap: () {
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => ExitInfo(exitId: info.data[index].id , info: info)));
+                        context, MaterialPageRoute(builder: (context) => ExitInfo(exitId: info.data[index].id , info: info.data[index])));
                   },
                   leading: const Icon(Icons.transit_enterexit, color: Colors.green),
                   title: Text(info.data[index].frontName),
