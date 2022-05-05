@@ -247,7 +247,7 @@ class _ExitInfo extends State<ExitInfo> {
               } else {
                 bakeToast('Se agrego sin problemas', type: ToastType.success),
                 hideLoader(),
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const MainMenu())),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu())),
               }
             })
             //developer.log(base64.encode(File(_image!.path).readAsBytesSync()))

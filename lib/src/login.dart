@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
         AuthService().setWarehouse(_apiResponse.apiToken);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const MainMenu()),
+          MaterialPageRoute(builder: (context) => MainMenu()),
         );
         bakeToast("Usuario Iniciado", type: ToastType.success);
       }

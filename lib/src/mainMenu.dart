@@ -3,11 +3,14 @@ import 'package:al/src/routes/enter/index.dart';
 import 'package:al/src/routes/exit/index.dart';
 import 'package:al/src/routes/home/index.dart';
 import 'package:al/src/routes/settings/index.dart';
+import 'package:al/src/routes/transfer/index.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 
 class MainMenu extends StatefulWidget {
-  const MainMenu({Key? key}) : super(key: key);
+  int pageIndex = 0;
+  MainMenu({Key? key, this.pageIndex = 0}) : super(key: key);
+
 
   @override
   _MainMenu createState() => _MainMenu();
@@ -15,12 +18,12 @@ class MainMenu extends StatefulWidget {
 
 class _MainMenu extends State<MainMenu>
 {
-  int currentIndex = 0;
 
   List listOfColors = [
     const HomeIndex(),
     const EnterIndex(),
     const ExitIndex(),
+    const TransferIndex(),
     const SettIndex(),
   ];
 
@@ -42,13 +45,13 @@ class _MainMenu extends State<MainMenu>
         ),
         backgroundColor: Colors.red,
       ),
-      body: listOfColors[currentIndex],
+      body: listOfColors[widget.pageIndex],
 
       bottomNavigationBar: BottomNavyBar(
-        selectedIndex: currentIndex,
+        selectedIndex: widget.pageIndex,
         onItemSelected: (index){
           setState(() {
-            currentIndex = index;
+            widget.pageIndex = index;
           });
         },
         items: <BottomNavyBarItem>[
@@ -67,6 +70,12 @@ class _MainMenu extends State<MainMenu>
           BottomNavyBarItem(
             icon: const Icon(Icons.exposure_minus_1),
             title: const Text('Salidas'),
+            activeColor: Colors.redAccent,
+            inactiveColor: Colors.black,
+          ),
+          BottomNavyBarItem(
+            icon: const Icon(Icons.code),
+            title: const Text('Tranferencia'),
             activeColor: Colors.redAccent,
             inactiveColor: Colors.black,
           ),

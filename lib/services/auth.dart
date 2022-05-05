@@ -83,7 +83,7 @@ class AuthService {
       var expDate = DateTime.fromMillisecondsSinceEpoch(json.decode(decodedToken)['exp'] * 1000);
       if(expDate.compareTo(DateTime.now())>0) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const MainMenu( )));
+            context, MaterialPageRoute(builder: (context) => MainMenu( )));
       } else {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const LoginPage()));

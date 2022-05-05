@@ -27,7 +27,7 @@ class _LoadOr extends State<LoadOr> {
           backgroundColor: Colors.red,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () =>  Navigator.push(context, MaterialPageRoute(builder: (context) => const MainMenu())),
+            onPressed: () =>  Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu())),
           ),
           title: Text('IOR:'+ widget.orCode!)
       ),

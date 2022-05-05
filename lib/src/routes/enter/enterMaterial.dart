@@ -41,7 +41,7 @@ class _EnterMaterial extends State<EnterMaterial> {
         actions: [
           IconButton(
               onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const MainMenu()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu()));
               },
               icon: const Icon(Icons.home)
           )

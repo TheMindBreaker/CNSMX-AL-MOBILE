@@ -4,6 +4,7 @@ import 'package:al/models/WareHousesModel.dart';
 import 'package:al/models/WareEnterProduct.dart';
 import 'package:al/models/ExitsInfo.dart';
 import 'package:al/models/WareInventoryModel.dart';
+import 'package:al/models/WareTransfers.dart';
 import 'package:http/http.dart' as http;
 import 'package:ots/ots.dart';
 import 'dart:convert';
@@ -56,6 +57,31 @@ class WarehouseService {
     final response = await http.get(Uri.https('connect.construtec.mx', 'Purchases/WareHouse/getInventoryOfWarehouse/'+ wareId.toString()),
         headers: headers);
     return WareInventory.fromJson(json.decode(response.body));
+  }
+  Future<WareTransfers> wareTransfers() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var wareId = prefs.getInt('cnsmxWarehouse');
+    var headers = {
+      'Authorization': 'Bearer ' + prefs.getString('cnsmxJwt')!
+    };
+    final response = await http.get(Uri.https('connect.construtec.mx', 'Purchases/WareHouse/getTransfers/'+ wareId.toString()), headers: headers);
+    return WareTransfers.fromJson(json.decode(response.body));
+  }
+  Future<WareEnterProduct> receiveTransfer(int wareId, int productId,double quantity, int moveId, int originId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var headers = {
+      'Authorization': 'Bearer ' + prefs.getString('cnsmxJwt')!
+    };
+    final response = await http.post(Uri.https('connect.construtec.mx', 'Purchases/WareHouse/receiveTransfer', ),
+        headers: headers,
+        body: {
+          'wareId':wareId.toString(),
+          'productId':productId.toString(),
+          'quantity':quantity.toString(),
+          'moveId':moveId.toString(),
+          'originId':originId.toString(),
+        });
+    return WareEnterProduct.fromJson(json.decode(response.body));
   }
   Future<ExistsDetails> wareExistDetails(int exitId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

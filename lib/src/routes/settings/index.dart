@@ -62,7 +62,7 @@ class _SettIndex extends State<SettIndex> {
               showLoader();
               AuthService().setWarehouse(jwt!).then((value) => {
                 hideLoader(),
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const MainMenu())),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu())),
             });},
           ),
         ),
