@@ -144,11 +144,9 @@ class _ExitInfo extends State<ExitInfo> {
   }
   Widget _buildList(ExistsDetails details) {
     return SizedBox(
-        height: (MediaQuery.of(context).size.height),
+        height: 530,
         child:
         ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
           itemCount:details.data.length,
           itemBuilder: (context,index){
             return
